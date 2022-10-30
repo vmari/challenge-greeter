@@ -1,0 +1,4 @@
+ansible==5.*
+Jinja2==2.*
+MarkupSafe==2.0.1
+PyYAML==5.*

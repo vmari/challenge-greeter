@@ -1,0 +1,15 @@
+# package directories
+node_modules
+.build
+
+temp
+dist
+.webpack
+.webpackCache
+
+# Serverless directories
+.serverless
+
+*.log
+
+.env

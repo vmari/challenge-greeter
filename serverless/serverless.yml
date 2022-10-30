@@ -1,0 +1,23 @@
+service: challenge-greeter
+useDotenv: true
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  stage: ${opt:stage, env:STAGE, 'local'}
+  runtime: nodejs16.x
+  region: ${opt:region, env:AWS_REGION,'us-east-2'}
+  vpc:
+    securityGroupIds:
+      - ${ssm:/lambda/security_group}
+    subnetIds:
+      - ${ssm:/lambda/private_subnet}
+functions:
+  app:
+    handler: handler.handler
+    tags:
+      project: 'challenge-greeter'
+    events:
+      - httpApi: '*'  

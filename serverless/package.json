@@ -1,0 +1,16 @@
+{
+    "name": "challenge-greeter",
+    "version": "1.0.0",
+    "description": "Challenge lambda function",
+    "main": "index.js",
+    "scripts": {
+        "deploy": "serverless deploy",
+        "sls": "serverless",
+        "start": "serverless offline start --stage local",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "devDependencies": {
+        "serverless": "^3.23.0",
+        "serverless-offline": "^11.2.1"
+    }
+}

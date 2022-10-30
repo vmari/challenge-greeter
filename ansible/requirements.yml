@@ -1,0 +1,6 @@
+roles:
+  - name: geerlingguy.apache
+  - name: geerlingguy.php
+  - name: geerlingguy.composer
+  - name: geerlingguy.apache-php-fpm
+  - name: ansible.posix

@@ -1,0 +1,36 @@
+---
+
+- name: Install php, apache and enable fpm
+  hosts: deploy
+  become: true
+  become_user: root
+  vars:
+    php_enable_php_fpm: true
+    apache_vhosts:
+      - servername: "3.17.75.47"
+        documentroot: "/var/www/php/public"
+        extra_parameters: |
+              ProxyPassMatch ^/(index.php(/.*)?)$ "unix:/var/run/php/php-fpm.sock|fcgi://localhost/var/www/php/public"
+
+  roles:
+    - geerlingguy.apache
+    - geerlingguy.php
+    - geerlingguy.composer
+    - geerlingguy.apache-php-fpm
+
+- name: Deploy symfony application
+  hosts: deploy
+  tasks:
+    - name: Create /var/www/php directory
+      become: true
+      become_user: root
+      file: dest=/var/www/php state=directory owner=www-data group=www-data mode=0700
+
+    - name: Copy php source code
+      become: true
+      become_user: www-data
+      ansible.posix.synchronize:
+        src: "../php"
+        dest: "/var/www"
+        recursive: true
+        perms: false
